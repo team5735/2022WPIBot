@@ -40,19 +40,12 @@ public final class Constants {
         }
 
         public static class DrivetrainConstants {
-                // TODO: Double check these numbers
+                // TODO: Double check these numbers for MK4
                 public static final double WHEEL_RADIUS = 0.0508; // meters
                 public static final double WHEEL_CIRCUMFERENCE = 2 * Math.PI * WHEEL_RADIUS; // meters
-                public static final double MK3_DRIVE_MOTOR_GEAR_RATIO = (48. / 16.) * (16. / 28.) * (60. / 15.); // (48*16*60)/(16*28*15)
-                                                                                                                 // =
-                                                                                                                 // 46080
-                                                                                                                 // /
-                                                                                                                 // 6720
-                                                                                                                 // =
-                                                                                                                 // 48:7
-                                                                                                                 // =
-                                                                                                                 // 6.85714286
-                public static final double MK3_TURN_MOTOR_GEAR_RATIO = (32. / 15.) * (60. / 15.); // 128:15 = 8.5333
+                // TODO: Update for MK4
+                public static final double MK4_DRIVE_MOTOR_GEAR_RATIO = 8.14 / 1.0;
+                public static final double MK4_TURN_MOTOR_GEAR_RATIO = 12.8 / 1.0;
 
                 // TODO: Measure track width and wheel base
 
@@ -78,32 +71,32 @@ public final class Constants {
                 public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 1;
                 public static final int FRONT_LEFT_TURN_MOTOR_ID = 2;
                 public static final int FRONT_LEFT_ABS_ENCODER_CHANNEL = 1;
-                public static final double FRONT_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 0.679;
+                public static final double FRONT_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 0.928;
 
                 public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 3;
                 public static final int FRONT_RIGHT_TURN_MOTOR_ID = 4;
                 public static final int FRONT_RIGHT_ABS_ENCODER_CHANNEL = 2;
-                public static final double FRONT_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 0.388;
+                public static final double FRONT_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 1.113;
 
                 public static final int BACK_LEFT_DRIVE_MOTOR_ID = 5;
                 public static final int BACK_LEFT_TURN_MOTOR_ID = 6;
                 public static final int BACK_LEFT_ABS_ENCODER_CHANNEL = 3;
-                public static final double BACK_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 0.117;
+                public static final double BACK_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 1.857;
 
                 public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 7;
                 public static final int BACK_RIGHT_TURN_MOTOR_ID = 8;
                 public static final int BACK_RIGHT_ABS_ENCODER_CHANNEL = 4;
-                public static final double BACK_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 0.549;
+                public static final double BACK_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 2.794;
 
                 // TODO: Populate characterization constants
                 public static final CharacterizationConstants DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                                .setFeedforwardConstants(0.0, 0.0, 0.0)
-                                .setFeedbackConstants(0.0, 0.0, 0.0)
+                                .setFeedforwardConstants(0.32, 1.51, 0.27)
+                                .setFeedbackConstants(0.05, 0.0, 0.0)
                                 .build();
 
                 public static final CharacterizationConstants TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                                .setFeedforwardConstants(0.0, 0.0, 0.0)
-                                .setFeedbackConstants(0.0, 0.0, 0.0)
+                                .setFeedforwardConstants(0.70364, 0.21449, 0.0049559)
+                                .setFeedbackConstants(4.3347, 0.0, 0.15614)
                                 .build();
         }
 
@@ -135,7 +128,7 @@ public final class Constants {
         public static class OIConstants {
                 public static final int DRIVER_CONTROLLER_PORT = 0;
                 public static final int SUBSYSTEM_CONTROLLER_PORT = 1;
-                public static final double JOYSTICK_DEADBAND = 0.05;
+                public static final double JOYSTICK_DEADBAND = 0.1;
         }
 
 }

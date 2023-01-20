@@ -10,7 +10,7 @@ public class UnitConversion {
     public static double falconToMetersPerSecond(double velocityFalconUnits) {
         return (velocityFalconUnits // in units/100ms
                 / UnitConversion.FALCON_ENCODER_CPR // becomes rev/100ms
-                / Constants.DrivetrainConstants.MK3_DRIVE_MOTOR_GEAR_RATIO // changes # of rev
+                / Constants.DrivetrainConstants.MK4_DRIVE_MOTOR_GEAR_RATIO // changes # of rev
                 * Constants.DrivetrainConstants.WHEEL_CIRCUMFERENCE) // becomes m/100ms
                 * 10; // becomes m/s
     }
@@ -19,21 +19,21 @@ public class UnitConversion {
         return (velocityMetersPerSecond // in m/s
                 / 10 // becomes m/100ms
                 / Constants.DrivetrainConstants.WHEEL_CIRCUMFERENCE // becomes rev/100ms
-                * Constants.DrivetrainConstants.MK3_DRIVE_MOTOR_GEAR_RATIO) // changes # of rev
+                * Constants.DrivetrainConstants.MK4_DRIVE_MOTOR_GEAR_RATIO) // changes # of rev
                 * UnitConversion.FALCON_ENCODER_CPR; // becomes units/100ms
     }
 
     public static double falconToMeters(double distanceFalconUnits) {
         return (distanceFalconUnits // in falcon units
                 / UnitConversion.FALCON_ENCODER_CPR // becomes rev
-                / Constants.DrivetrainConstants.MK3_DRIVE_MOTOR_GEAR_RATIO // changes # of rev
+                / Constants.DrivetrainConstants.MK4_DRIVE_MOTOR_GEAR_RATIO // changes # of rev
                 * Constants.DrivetrainConstants.WHEEL_CIRCUMFERENCE); // becomes m
     }
 
     public static double metersToFalcon(double distanceMeters) {
         return (distanceMeters // in m
                 / Constants.DrivetrainConstants.WHEEL_CIRCUMFERENCE // becomes rev
-                * Constants.DrivetrainConstants.MK3_DRIVE_MOTOR_GEAR_RATIO) // changes # of rev
+                * Constants.DrivetrainConstants.MK4_DRIVE_MOTOR_GEAR_RATIO) // changes # of rev
                 * UnitConversion.FALCON_ENCODER_CPR; // becomes falcon units
     }
 
