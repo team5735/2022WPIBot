@@ -142,6 +142,7 @@ public class SwerveModule {
         
         // Logging
         SmartDashboard.putString("Swerve[" + this.moduleId + "] state", state.toString());
+        // SmartDashboard.putNumber("Swerve[" + this.moduleId + "] Abs Encoder", this.turnAbsoluteEncoder.get());
     }
 
     /**

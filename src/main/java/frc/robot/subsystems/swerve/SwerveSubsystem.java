@@ -8,14 +8,34 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
+/*
+    Robot Reference Frame
+  
+    +Rotation: Clockwise (Rotate Left)
+
+             +X 
+         ___________
+        |     F     |
+        |           |
+   +Y   |L         R|    -Y
+        |           |
+        |_____B_____|
+
+             -X
+ */
 
 public class SwerveSubsystem extends SubsystemBase {
     private final SwerveModule frontLeft, frontRight, backLeft, backRight;
     private final AHRS gyro;
     private final SwerveDriveOdometry odometer;
+    private final Field2d m_field = new Field2d();
 
     private boolean isFieldOrientedEnabled = false;
 
@@ -30,7 +50,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.FRONT_LEFT_ABS_ENCODER_OFFSET_ROTATIONS,
                 1,
                 Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
-                Constants.MotorConstants.TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
+                Constants.MotorConstants.FRONT_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
         this.frontRight = new SwerveModule(
                 Constants.MotorConstants.FRONT_RIGHT_DRIVE_MOTOR_ID,
@@ -41,7 +61,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.FRONT_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS,
                 2,
                 Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
-                Constants.MotorConstants.TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
+                Constants.MotorConstants.FRONT_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
         this.backLeft = new SwerveModule(
                 Constants.MotorConstants.BACK_LEFT_DRIVE_MOTOR_ID,
@@ -52,7 +72,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.BACK_LEFT_ABS_ENCODER_OFFSET_ROTATIONS,
                 3,
                 Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
-                Constants.MotorConstants.TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
+                Constants.MotorConstants.BACK_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
         this.backRight = new SwerveModule(
                 Constants.MotorConstants.BACK_RIGHT_DRIVE_MOTOR_ID,
@@ -63,9 +83,9 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.BACK_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS,
                 4,
                 Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
-                Constants.MotorConstants.TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
+                Constants.MotorConstants.BACK_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
-        this.gyro = new AHRS(SPI.Port.kMXP);
+        this.gyro = new AHRS(SerialPort.Port.kUSB);
         this.odometer = new SwerveDriveOdometry(
                 Constants.DrivetrainConstants.DT_KINEMATICS, // Give the odometry the kinematics of the robot,
                 new Rotation2d(0)); // and the starting angle of the robot
@@ -79,6 +99,8 @@ public class SwerveSubsystem extends SubsystemBase {
                 throw new RuntimeException("Could not reset the heading of the robot!");
             }
         }).start();
+
+        SmartDashboard.putData("Field", m_field);
     }
 
     /**
@@ -100,6 +122,7 @@ public class SwerveSubsystem extends SubsystemBase {
      * Resets the heading of the robot.
      */
     public void zeroHeading() {
+        System.out.println("Resetting gyro heading to 0");
         this.gyro.reset();
     }
 
@@ -109,7 +132,8 @@ public class SwerveSubsystem extends SubsystemBase {
      * @return
      */
     public double getGyroHeadingDeg() {
-        return Math.IEEEremainder(this.gyro.getAngle(), 360);
+        // Negative because NavX says clockwise is positive but WPILib says counterclockwise is positive
+        return Math.IEEEremainder(-this.gyro.getAngle(), 360);
     }
 
     /**
@@ -169,6 +193,10 @@ public class SwerveSubsystem extends SubsystemBase {
                 backLeft.getState(),
                 backRight.getState());
 
+        m_field.setRobotPose(this.odometer.getPoseMeters());
+
+        SmartDashboard.putBoolean("Gyro Calibrating", this.gyro.isCalibrating());
+        SmartDashboard.putBoolean("Gyro Connected", this.gyro.isConnected());
         SmartDashboard.putNumber("Robot Heading (deg)", this.getGyroHeadingDeg());
         SmartDashboard.putString("Robot Location (m)", this.getPose().getTranslation().toString());
         SmartDashboard.putBoolean("Field Oriented Enabled", this.isFieldOrientedEnabled);

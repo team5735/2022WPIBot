@@ -57,9 +57,9 @@ public class RobotContainer {
   private void configureDriverBindings() {
     // When there's no other command scheduled, drive the robot with Xbox joysticks
     this.swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(this.swerveSubsystem,
-        () -> this.driverController.getLeftX(),
-        () -> this.driverController.getLeftY(),
-        () -> this.driverController.getRightX()));
+        () -> -this.driverController.getLeftY(), // Forward on controller is -Y but forward on robot is X.
+        () -> -this.driverController.getLeftX(), // Left on controller is -X but left on robot is +Y.
+        () -> -this.driverController.getRightX())); // Rotate left on controller is - but rotate left on controller is +
 
     // When Y is pressed on driver controller, toggle field oriented
     new JoystickButton(this.driverController, XboxController.Button.kY.value)
@@ -75,7 +75,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // The trajectory to follow
-    Trajectory trajectory = Trajectories.TEST_TRAJECTORY;
+    Trajectory trajectory = Trajectories.TRIANGLE;
 
     PIDController xController = new PIDController(Constants.AutoConstants.AUTO_XCONTROLLER_KP, 0, 0);
     PIDController yController = new PIDController(Constants.AutoConstants.AUTO_YCONTROLLER_KP, 0, 0);

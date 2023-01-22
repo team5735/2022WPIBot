@@ -10,11 +10,20 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import frc.robot.Constants;
 
 public class Trajectories {
-    public static final Trajectory TEST_TRAJECTORY = TrajectoryGenerator.generateTrajectory(
+        public static final Trajectory TEST_TRAJECTORY = TrajectoryGenerator.generateTrajectory(
             new Pose2d(0, 0, new Rotation2d(0)),
             List.of(
                     new Translation2d(1, 0), // 1 meter forward
                     new Translation2d(1, -1)), // 1 meter forward, 1 meter right
             new Pose2d(2, -1, Rotation2d.fromDegrees(180)), // 2 meters forward, 1 meter right, 180 degrees
             Constants.AutoConstants.AUTO_TRAJECTORY_CONFIG);
+
+        public static final Trajectory TRIANGLE = TrajectoryGenerator.generateTrajectory(
+                new Pose2d(0, 0, new Rotation2d(0)),
+                List.of(
+                        new Translation2d(),
+                        new Translation2d(2, 2)
+                ),
+                new Pose2d(0, 0, Rotation2d.fromDegrees(359)), 
+                Constants.AutoConstants.AUTO_TRAJECTORY_CONFIG);
 }

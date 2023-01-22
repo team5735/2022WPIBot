@@ -40,22 +40,19 @@ public final class Constants {
         }
 
         public static class DrivetrainConstants {
-                // TODO: Double check these numbers for MK4
-                public static final double WHEEL_RADIUS = 0.0508; // meters
+                public static final double WHEEL_RADIUS = Units.inchesToMeters(2.0); // meters // MK4 Billet wheel has 4 inches outer diameter, so 2 inches radius
                 public static final double WHEEL_CIRCUMFERENCE = 2 * Math.PI * WHEEL_RADIUS; // meters
-                // TODO: Update for MK4
                 public static final double MK4_DRIVE_MOTOR_GEAR_RATIO = 8.14 / 1.0;
                 public static final double MK4_TURN_MOTOR_GEAR_RATIO = 12.8 / 1.0;
 
-                // TODO: Measure track width and wheel base
-
                 // Locations of swerve modules, in meters, from the center of the robot
                 // Distance between right and left wheels, in m
-                public static final double DT_TRACK_WIDTH = Units.inchesToMeters(21);
+                public static final double DT_TRACK_WIDTH = Units.inchesToMeters(19.5);
                 // Distance between front and back wheels, in m
-                public static final double DT_WHEEL_BASE = Units.inchesToMeters(25.5);
+                public static final double DT_WHEEL_BASE = Units.inchesToMeters(21.5);
 
-                public static final Translation2d locationFL = new Translation2d(DT_WHEEL_BASE / 2, DT_TRACK_WIDTH / 2);
+                public static final Translation2d locationFL = new Translation2d(DT_WHEEL_BASE / 2,
+                                 DT_TRACK_WIDTH / 2);
                 public static final Translation2d locationFR = new Translation2d(DT_WHEEL_BASE / 2,
                                 -DT_TRACK_WIDTH / 2);
                 public static final Translation2d locationBL = new Translation2d(-DT_WHEEL_BASE / 2,
@@ -68,47 +65,71 @@ public final class Constants {
         }
 
         public static class MotorConstants {
-                public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 1;
-                public static final int FRONT_LEFT_TURN_MOTOR_ID = 2;
-                public static final int FRONT_LEFT_ABS_ENCODER_CHANNEL = 1;
-                public static final double FRONT_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 0.928;
+                // Offset values must be positive!
+                
+                // Module 4
+                public static final int FRONT_LEFT_DRIVE_MOTOR_ID = 7;
+                public static final int FRONT_LEFT_TURN_MOTOR_ID = 8;
+                public static final int FRONT_LEFT_ABS_ENCODER_CHANNEL = 4;
+                public static final double FRONT_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 1.302;//2.794;
+                public static final CharacterizationConstants FRONT_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
+                        .setFeedforwardConstants(0.61235, 0.21322, 0.0050862)
+                        .setFeedbackConstants(4.404, 0.0, 0.16072)
+                        .build();
 
-                public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 3;
-                public static final int FRONT_RIGHT_TURN_MOTOR_ID = 4;
-                public static final int FRONT_RIGHT_ABS_ENCODER_CHANNEL = 2;
-                public static final double FRONT_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 1.113;
+                // Module 3
+                public static final int FRONT_RIGHT_DRIVE_MOTOR_ID = 5;
+                public static final int FRONT_RIGHT_TURN_MOTOR_ID = 6;
+                public static final int FRONT_RIGHT_ABS_ENCODER_CHANNEL = 3;
+                public static final double FRONT_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 2.362;//1.857;
+                public static final CharacterizationConstants FRONT_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
+                        .setFeedforwardConstants(0.63202, 0.21446, 0.0045286)
+                        .setFeedbackConstants(4.2017, 0.0, 0.14116)
+                        .build();
 
-                public static final int BACK_LEFT_DRIVE_MOTOR_ID = 5;
-                public static final int BACK_LEFT_TURN_MOTOR_ID = 6;
-                public static final int BACK_LEFT_ABS_ENCODER_CHANNEL = 3;
-                public static final double BACK_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 1.857;
+                // Module 2
+                public static final int BACK_LEFT_DRIVE_MOTOR_ID = 3;
+                public static final int BACK_LEFT_TURN_MOTOR_ID = 4;
+                public static final int BACK_LEFT_ABS_ENCODER_CHANNEL = 2;
+                public static final double BACK_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 2.632;//1.113;
+                public static final CharacterizationConstants BACK_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
+                        .setFeedforwardConstants(0.75777, 0.21604, 0.0052368)
+                        .setFeedbackConstants(4.4082, 0.0, 0.16538)
+                        .build();
 
-                public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 7;
-                public static final int BACK_RIGHT_TURN_MOTOR_ID = 8;
-                public static final int BACK_RIGHT_ABS_ENCODER_CHANNEL = 4;
-                public static final double BACK_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 2.794;
+                // Module 1
+                public static final int BACK_RIGHT_DRIVE_MOTOR_ID = 1;
+                public static final int BACK_RIGHT_TURN_MOTOR_ID = 2;
+                public static final int BACK_RIGHT_ABS_ENCODER_CHANNEL = 1;
+                public static final double BACK_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 1.432;//0.928;
+                public static final CharacterizationConstants BACK_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
+                        .setFeedforwardConstants(0.62974, 0.21458, 0.0044083)
+                        .setFeedbackConstants(4.1585, 0.0, 0.13685)
+                        .build();
 
                 // TODO: Populate characterization constants
+                // TODO: These drive motor constants are stolen.
                 public static final CharacterizationConstants DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
                                 .setFeedforwardConstants(0.32, 1.51, 0.27)
                                 .setFeedbackConstants(0.05, 0.0, 0.0)
                                 .build();
 
-                public static final CharacterizationConstants TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                                .setFeedforwardConstants(0.70364, 0.21449, 0.0049559)
-                                .setFeedbackConstants(4.3347, 0.0, 0.15614)
-                                .build();
+                // TODO: These turn motor constants are right for one motor, check for all motors
+                // public static final CharacterizationConstants FRONT_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
+                //                 .setFeedforwardConstants(0.70364, 0.21449, 0.0049559)
+                //                 .setFeedbackConstants(4.3347, 0.0, 0.15614)
+                //                 .build();
         }
 
         public static final class AutoConstants {
                 public static final double AUTO_MAX_SPEED_METERS_PER_SECOND = Constants.SpeedConstants.MAX_SPEED_METERS_PER_SECOND
-                                / 4; // During auto, 1/4 of max speed
+                                / 2; // During auto, 1/2 of max speed
                 public static final double AUTO_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = Constants.SpeedConstants.MAX_ANGULAR_SPEED_RADIANS_PER_SECOND
-                                / 10; // During auto, 1/10 of max angular speed
+                                / 2; // During auto, 1/2 of max angular speed
                 public static final double AUTO_MAX_ACCELERATION_METERS_PER_SECONDSQ = Constants.SpeedConstants.MAX_ACCELERATION_METERS_PER_SECONDSQ
                                 / 2; // During auto, 1/2 of max acceleration
                 public static final double AUTO_MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECONDSQ = Constants.SpeedConstants.MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECONDSQ
-                                / 4; // During auto, 1/4 of max angular acceleration
+                                / 2; // During auto, 1/2 of max angular acceleration
 
                 // TODO: Tune these auto controller constants
                 public static final double AUTO_XCONTROLLER_KP = 1.5;
