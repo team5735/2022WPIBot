@@ -49,7 +49,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.FRONT_LEFT_ABS_ENCODER_CHANNEL,
                 Constants.MotorConstants.FRONT_LEFT_ABS_ENCODER_OFFSET_ROTATIONS,
                 1,
-                Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
+                Constants.MotorConstants.FRONT_LEFT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
                 Constants.MotorConstants.FRONT_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
         this.frontRight = new SwerveModule(
@@ -60,7 +60,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.FRONT_RIGHT_ABS_ENCODER_CHANNEL,
                 Constants.MotorConstants.FRONT_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS,
                 2,
-                Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
+                Constants.MotorConstants.FRONT_RIGHT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
                 Constants.MotorConstants.FRONT_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
         this.backLeft = new SwerveModule(
@@ -71,7 +71,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.BACK_LEFT_ABS_ENCODER_CHANNEL,
                 Constants.MotorConstants.BACK_LEFT_ABS_ENCODER_OFFSET_ROTATIONS,
                 3,
-                Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
+                Constants.MotorConstants.BACK_LEFT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
                 Constants.MotorConstants.BACK_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
         this.backRight = new SwerveModule(
@@ -82,7 +82,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.BACK_RIGHT_ABS_ENCODER_CHANNEL,
                 Constants.MotorConstants.BACK_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS,
                 4,
-                Constants.MotorConstants.DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
+                Constants.MotorConstants.BACK_RIGHT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
                 Constants.MotorConstants.BACK_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
         this.gyro = new AHRS(SerialPort.Port.kUSB);

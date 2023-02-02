@@ -66,6 +66,12 @@ public class RobotContainer {
         .whenPressed(new InstantCommand(() -> {
           this.swerveSubsystem.toggleFieldOriented();
         }));
+
+    // When X is pressed, reset gyro to 0
+    new JoystickButton(this.driverController, XboxController.Button.kX.value)
+        .whenPressed(new InstantCommand(() -> {
+          this.swerveSubsystem.zeroHeading();
+        }));
   }
 
   /**
@@ -75,7 +81,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // The trajectory to follow
-    Trajectory trajectory = Trajectories.TRIANGLE;
+    Trajectory trajectory = Trajectories.TEST_TRAJECTORY;
 
     PIDController xController = new PIDController(Constants.AutoConstants.AUTO_XCONTROLLER_KP, 0, 0);
     PIDController yController = new PIDController(Constants.AutoConstants.AUTO_YCONTROLLER_KP, 0, 0);
