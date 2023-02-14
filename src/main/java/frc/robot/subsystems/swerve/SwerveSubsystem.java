@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
@@ -200,6 +201,11 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Robot Heading (deg)", this.getGyroHeadingDeg());
         SmartDashboard.putString("Robot Location (m)", this.getPose().getTranslation().toString());
         SmartDashboard.putBoolean("Field Oriented Enabled", this.isFieldOrientedEnabled);
+
+        SmartDashboard.putNumber("FL Wheel Angle", Units.radiansToDegrees(frontLeft.getWheelAngle()));
+        SmartDashboard.putNumber("FR Wheel Angle", Units.radiansToDegrees(frontRight.getWheelAngle()));
+        SmartDashboard.putNumber("BL Wheel Angle", Units.radiansToDegrees(backLeft.getWheelAngle()));
+        SmartDashboard.putNumber("BR Wheel Angle", Units.radiansToDegrees(backRight.getWheelAngle()));
     }
 
     /**

@@ -81,7 +81,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // The trajectory to follow
-    Trajectory trajectory = Trajectories.TEST_TRAJECTORY;
+    Trajectory trajectory = Trajectories.ONE_METER_CURVE_LEFT;
 
     PIDController xController = new PIDController(Constants.AutoConstants.AUTO_XCONTROLLER_KP, 0, 0);
     PIDController yController = new PIDController(Constants.AutoConstants.AUTO_YCONTROLLER_KP, 0, 0);

@@ -42,7 +42,7 @@ public final class Constants {
         public static class DrivetrainConstants {
                 public static final double WHEEL_RADIUS = Units.inchesToMeters(2.0); // meters // MK4 Billet wheel has 4 inches outer diameter, so 2 inches radius
                 public static final double WHEEL_CIRCUMFERENCE = 2 * Math.PI * WHEEL_RADIUS; // meters
-                public static final double MK4_DRIVE_MOTOR_GEAR_RATIO = 8.14 / 1.0;
+                public static final double MK4_DRIVE_MOTOR_GEAR_RATIO = 6.12 / 1.0;
                 public static final double MK4_TURN_MOTOR_GEAR_RATIO = 12.8 / 1.0;
 
                 // Locations of swerve modules, in meters, from the center of bthe robot
@@ -73,8 +73,8 @@ public final class Constants {
                 public static final int FRONT_LEFT_ABS_ENCODER_CHANNEL = 4;
                 public static final double FRONT_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 1.302;//2.794;
                 public static final CharacterizationConstants FRONT_LEFT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                                .setFeedforwardConstants(0.60709, 2.7646, 0.15464/*0.6765, 2.8661, 0.096105*/) //0.60206, 2.8155. 0.30703 -- 0.5405, 2.8575, 0.31968
-                                .setFeedbackConstants(2.64, 0.0, 0.0) //3.6151, new tested value: 3.8261
+                                .setFeedforwardConstants(0.60709, 2.7646, 0.15464)
+                                .setFeedbackConstants(2.64, 0.0, 0.0)
                                 .build();
                 public static final CharacterizationConstants FRONT_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
                         .setFeedforwardConstants(0.61235, 0.21322, 0.0050862)
@@ -87,8 +87,8 @@ public final class Constants {
                 public static final int FRONT_RIGHT_ABS_ENCODER_CHANNEL = 3;
                 public static final double FRONT_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 2.362;//1.857;
                 public static final CharacterizationConstants FRONT_RIGHT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                                .setFeedforwardConstants(0.49831, 2.6069, 0.13338) // 0.49794, 2.777, 0.11579 -- 0.40416, 2.8677, 0.15439 -- 0.49278, 2.6965, 0.14252
-                                .setFeedbackConstants(2.5147/*2.6455*/, 0.0, 0.0) // 2.3645 -- 2.8886
+                                .setFeedforwardConstants(0.49831, 2.6069, 0.13338)
+                                .setFeedbackConstants(2.5147, 0.0, 0.0)
                                 .build();
                 public static final CharacterizationConstants FRONT_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
                         .setFeedforwardConstants(0.63202, 0.21446, 0.0045286)
@@ -101,11 +101,11 @@ public final class Constants {
                 public static final int BACK_LEFT_ABS_ENCODER_CHANNEL = 2;
                 public static final double BACK_LEFT_ABS_ENCODER_OFFSET_ROTATIONS = 2.632;//1.113;
                 public static final CharacterizationConstants BACK_LEFT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                        .setFeedforwardConstants(0.60709, 2.7646, 0.15464) //0.60206, 2.8155. 0.30703
-                        .setFeedbackConstants(2.64, 0.0, 0.0) //3.6151
+                        .setFeedforwardConstants(0.60709, 2.7646, 0.15464) 
+                        .setFeedbackConstants(2.64, 0.0, 0.0)
                         .build();
                 public static final CharacterizationConstants BACK_LEFT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                        .setFeedforwardConstants(0.65777, 0.21604, 0.0052368) // 0.75777
+                        .setFeedforwardConstants(0.65777, 0.21604, 0.0052368)
                         .setFeedbackConstants(4.4082, 0.0, 0.16538)
                         .build();
 
@@ -115,7 +115,7 @@ public final class Constants {
                 public static final int BACK_RIGHT_ABS_ENCODER_CHANNEL = 1;
                 public static final double BACK_RIGHT_ABS_ENCODER_OFFSET_ROTATIONS = 1.432;//0.928;
                 public static final CharacterizationConstants BACK_RIGHT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
-                        .setFeedforwardConstants(0.49831, 2.6069, 0.13338/*0.59757, 2.7237, 0.63104*/) // 0.49794, 2.777, 0.11579
+                        .setFeedforwardConstants(0.49831, 2.6069, 0.13338)
                         .setFeedbackConstants(2.5147, 0.0, 0.0) // 2.3645
                         .build();
                 public static final CharacterizationConstants BACK_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS = new CharacterizationConstants.Builder()
@@ -150,9 +150,9 @@ public final class Constants {
                                 / 2; // During auto, 1/2 of max angular acceleration
 
                 // TODO: Tune these auto controller constants
-                public static final double AUTO_XCONTROLLER_KP = 1.5;
-                public static final double AUTO_YCONTROLLER_KP = 1.5;
-                public static final double AUTO_THETACONTROLLER_KP = 3;
+                public static final double AUTO_XCONTROLLER_KP = 5;
+                public static final double AUTO_YCONTROLLER_KP = 5;
+                public static final double AUTO_THETACONTROLLER_KP = 5;
 
                 public static final TrapezoidProfile.Constraints AUTO_THETACONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints(
                                 AUTO_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND,
@@ -167,7 +167,7 @@ public final class Constants {
         public static class OIConstants {
                 public static final int DRIVER_CONTROLLER_PORT = 0;
                 public static final int SUBSYSTEM_CONTROLLER_PORT = 1;
-                public static final double JOYSTICK_DEADBAND = 0.13;
+                public static final double JOYSTICK_DEADBAND = 0.08;
         }
 
 }
