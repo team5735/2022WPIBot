@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.SwerveJoystickCmd;
+import frc.robot.commands.BrakeCommand;
 import frc.robot.subsystems.swerve.SwerveSubsystem;
 import frc.robot.trajectories.Trajectories;
 
@@ -72,7 +73,13 @@ public class RobotContainer {
         .whenPressed(new InstantCommand(() -> {
           this.swerveSubsystem.zeroHeading();
         }));
+
+    // When B is pressed, make the wheels brake.
+    new JoystickButton(this.driverController, XboxController.Button.kB.value)
+        .whenHeld(new BrakeCommand(this.swerveSubsystem));
   }
+
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

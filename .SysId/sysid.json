@@ -4,6 +4,11 @@
     "NetworkTables Settings": {
       "serverTeam": "5735"
     },
+    "Program Log": {
+      "window": {
+        "visible": false
+      }
+    },
     "mode": "Client",
     "serverTeam": "5735"
   }
