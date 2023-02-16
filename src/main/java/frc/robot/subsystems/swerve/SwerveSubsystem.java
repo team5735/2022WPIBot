@@ -86,7 +86,7 @@ public class SwerveSubsystem extends SubsystemBase {
                 Constants.MotorConstants.BACK_RIGHT_DRIVE_MOTOR_CHARACTERIZATION_CONSTANTS,
                 Constants.MotorConstants.BACK_RIGHT_TURN_MOTOR_CHARACTERIZATION_CONSTANTS);
 
-        this.gyro = new AHRS(SerialPort.Port.kUSB);
+        this.gyro = new AHRS(SPI.Port.kMXP);
         this.odometer = new SwerveDriveOdometry(
                 Constants.DrivetrainConstants.DT_KINEMATICS, // Give the odometry the kinematics of the robot,
                 new Rotation2d(0)); // and the starting angle of the robot
